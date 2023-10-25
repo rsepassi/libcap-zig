@@ -10,6 +10,7 @@ pub fn build(b: *std.Build) !void {
         .optimize = optimize,
     });
     static_lib.addCSourceFiles(&c_sources, &[_][]const u8{});
+    static_lib.addIncludePath(.{.path = "src/libcap" });
     static_lib.addIncludePath(.{.path = "src/libcap/include" });
     static_lib.linkLibC();
     static_lib.installHeader("src/libcap/include/sys/capability.h", "sys/capability.h");

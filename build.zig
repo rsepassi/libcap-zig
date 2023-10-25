@@ -12,10 +12,9 @@ pub fn build(b: *std.Build) !void {
     static_lib.addCSourceFiles(&c_sources, &[_][]const u8{});
     static_lib.addIncludePath(.{.path = "src/libcap/include" });
     static_lib.linkLibC();
+    static_lib.installHeader("src/libcap/include/sys/capability.h", "sys/capability.h");
     b.installArtifact(static_lib);
 
-    const header = b.addInstallHeaderFile("src/libcap/include/sys/capability.h", "sys/capability.h");
-    b.getInstallStep().dependOn(&header.step);
 }
 
 const c_sources = [_][]const u8 {
